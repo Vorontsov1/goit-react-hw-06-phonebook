@@ -5,10 +5,7 @@ import Filter from 'components/Filter/Filter';
 import ContactForm from 'components/ContactForm/ContactForm';
 
 export class App extends Component {
-  // state = {
-  //   contacts: [],
-  //   filter: '',
-  // };
+  
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -18,8 +15,6 @@ export class App extends Component {
       { id: 'id-5', name: 'Vadim Olegov', number: '+380941842398' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
 
   formSubmitHandler = data => {
@@ -30,6 +25,8 @@ export class App extends Component {
       : contacts.push({ id: nanoid(), name: name, number: number });
     this.setState({ contacts: contacts });
   };
+
+ 
 
   handleChange = evt => {
     this.setState({ filter: evt.target.value });
