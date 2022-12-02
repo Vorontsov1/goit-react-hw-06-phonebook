@@ -5,8 +5,6 @@ import Filter from 'components/Filter/Filter';
 import ContactForm from 'components/ContactForm/ContactForm';
 
 
-const CONTACTS_KEY = 'contacts';
-
 
 export class App extends Component {
   state = {
@@ -19,22 +17,25 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const phoneContacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(phoneContacts);
+    
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const { contacts } = this.state;
 
     if (prevState.contacts !== contacts) {
       console.log('update information');
-      localStorage.setItem(CONTACTS_KEY, JSON.stringify(contacts));
+      localStorage.setItem('contacts', JSON.stringify(contacts));
     }
   }
 
-  componentDidMount() {
-    const phoneContacts = localStorage.getItem(CONTACTS_KEY);
-    const parsedContacts = JSON.parse(phoneContacts);
-    if (parsedContacts) {
-      this.setState({ contacts: parsedContacts });
-    }
-  }
+  
 
   formSubmitHandler = data => {
     const { name, number } = data;
