@@ -4,18 +4,37 @@ import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
 import ContactForm from 'components/ContactForm/ContactForm';
 
+
+const CONTACTS_KEY = 'contacts';
+
+
 export class App extends Component {
-  
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
       { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-      { id: 'id-5', name: 'Vadim Olegov', number: '+380941842398' },
     ],
     filter: '',
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    const { contacts } = this.state;
+
+    if (prevState.contacts !== contacts) {
+      console.log('update information');
+      localStorage.setItem(CONTACTS_KEY, JSON.stringify(contacts));
+    }
+  }
+
+  componentDidMount() {
+    const phoneContacts = localStorage.getItem(CONTACTS_KEY);
+    const parsedContacts = JSON.parse(phoneContacts);
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
 
   formSubmitHandler = data => {
     const { name, number } = data;
@@ -25,8 +44,6 @@ export class App extends Component {
       : contacts.push({ id: nanoid(), name: name, number: number });
     this.setState({ contacts: contacts });
   };
-
- 
 
   handleChange = evt => {
     this.setState({ filter: evt.target.value });
@@ -64,4 +81,3 @@ export class App extends Component {
     );
   }
 }
-
