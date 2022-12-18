@@ -1,27 +1,38 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import s from './ContactForm.module.css';
 
-export default class ContactForm extends Component {
-  static propTypes = { formSubmitHandler: PropTypes.func.isRequired };
 
-  state = { name: '', number: '' };
+export default function ContactForm ({formSubmitHandler}) {
+ const [name, setName] = useState('');
+ const [number, setNumber] = useState('');
+ 
+ 
 
-  handleSubmit = e => {
+ const handleSubmit = e => {
     e.preventDefault();
-    const { props, state } = this;
-    props.formSubmitHandler(state);
-    this.setState({ name: '', number: '' });
+    formSubmitHandler(name, number);
+    setName('');
+    setNumber('');
   };
 
-  handleChange = evt => {
+  const handleChange = evt => {
     const { name, value } = evt.target;
-    this.setState({ [name]: value });
+   switch(name) {
+    case 'name':
+    setName(value);
+    break;
+
+    case 'number':
+      setNumber(value);
+      break;
+
+      default:
+        break;
+   }
   };
 
-  render() {
-    const { name, number } = this.state;
-    const { handleSubmit, handleChange } = this;
+
 
     return (
       <form className={s.form} onSubmit={handleSubmit}>
@@ -58,4 +69,8 @@ export default class ContactForm extends Component {
       </form>
     );
   }
-}
+
+  ContactForm.propTypes = {
+    formSubmitHandler: PropTypes.func.isRequired,
+  }
+
