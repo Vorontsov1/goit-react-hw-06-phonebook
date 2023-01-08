@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
@@ -24,6 +24,12 @@ export default function App() {
           },
         ]);
   };
+
+  useEffect(() => {
+    console.log('update information');
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
+
 
   const handleChange = evt => {
     setFilter(evt.target.value);
