@@ -10,10 +10,11 @@ export default function ContactForm ({formSubmitHandler}) {
  
 
  const handleSubmit = e => {
-    e.preventDefault();
-    formSubmitHandler(name, number);
-    setName('');
-    setNumber('');
+  const lowerName = e.target.name.value.toLowerCase();
+  const resultName = lowerName.split(/\s+/).map(word => word[0].toUpperCase() + word.substring(1)).join(' ');
+  formSubmitHandler(resultName, number);
+  setName('');
+  setNumber('');
   };
 
   const handleChange = evt => {
