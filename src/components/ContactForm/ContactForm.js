@@ -29,15 +29,6 @@ export default function ContactForm() {
       console.error('Contacts are undefined');
     }
     
-    // contacts.some(contact => contact.name === name)
-    //   ? alert(`${name} is already in contacts`)
-    //   : dispatch(
-    //       addContact({
-    //         id: nanoid(),
-    //         name: name,
-    //         number: number,
-    //       })
-    //     );
 
     setName('');
     setNumber('');
