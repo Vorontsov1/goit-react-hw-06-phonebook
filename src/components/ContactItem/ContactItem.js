@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import {removeContacts} from 'redux/contacts/slice';
+import {deleteContact} from 'redux/contacts/contactsslice';
 import PropTypes from 'prop-types';
 import s from './ContactItem.module.css';
 
@@ -14,7 +14,7 @@ export default function ContactItem({ id, name, number}) {
         className={s.button}
         type="submit"
         name={name}
-        onClick={() => dispatch(removeContacts(id))}
+        onClick={() => dispatch(deleteContact(id))}
       >
         Delete
       </button>

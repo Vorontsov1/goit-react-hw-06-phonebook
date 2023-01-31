@@ -1,30 +1,43 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContacts } from 'redux/contacts/slice';
+import { addContact } from 'redux/contacts/contactsslice';
 import { getContacts } from 'redux/contacts/selectors';
 import { nanoid } from 'nanoid';
 import s from './ContactForm.module.css';
-
 
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(getContacts) || [];
+  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    contacts.some(contact => contact.name === name)
-      ? alert(`${name} is already in contacts`)
-      : dispatch(
-          addContacts({
-            id: nanoid(),
-            name: name,
-            number: number,
-          })
-        );
+    if (contacts) {
+      contacts.some(contact => contact.name === name)
+        ? alert(`${name} is already in contacts`)
+        : dispatch(
+            addContact({
+              id: nanoid(),
+              name: name,
+              number: number,
+            })
+          );
+    } else {
+      console.error('Contacts are undefined');
+    }
+    
+    // contacts.some(contact => contact.name === name)
+    //   ? alert(`${name} is already in contacts`)
+    //   : dispatch(
+    //       addContact({
+    //         id: nanoid(),
+    //         name: name,
+    //         number: number,
+    //       })
+    //     );
 
     setName('');
     setNumber('');
@@ -81,3 +94,5 @@ export default function ContactForm() {
     </form>
   );
 }
+
+
