@@ -15,7 +15,9 @@ export default function ContactForm() {
   const handleSubmit = e => {
     e.preventDefault();
 
-    
+    if (!contacts) {
+      return;
+    }
 
     contacts.some(contact => contact.name === name)
     ? alert(`${name} is already in contacts`)
