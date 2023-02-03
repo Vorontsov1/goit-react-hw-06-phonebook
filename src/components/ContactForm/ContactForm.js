@@ -15,6 +15,8 @@ export default function ContactForm() {
   const handleSubmit = e => {
     e.preventDefault();
 
+    window.history.replaceState({}, document.title, window.location.pathname);
+
     contacts.some(contact => contact.name === name)
     ? alert(`${name} is already in contacts`)
     : dispatch(
