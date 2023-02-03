@@ -14,23 +14,22 @@ export default function ContactForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-
+    
     if (contacts) {
-      contacts.some(contact => contact.name === name)
-      ? alert(`&{name} is already in contacts`)
+    contacts.some(contact => contact.name === name)
+      ? alert(`${name} is already in contacts`)
       : dispatch(
-        addContact({
-          id: nanoid(),
-          name: name,
-          number: number,
-        })
-        && setName(''),
-        setNumber(''),
-      );
-    } else {
-      console.log('Contact are undefined');
-    }
-  }
+          addContact({
+            id: nanoid(),
+            name: name,
+            number: number,
+          })
+        );
+
+    setName('');
+    setNumber('');
+  };
+};
 
   const handleChange = evt => {
     const { name, value } = evt.target;
@@ -83,4 +82,3 @@ export default function ContactForm() {
     </form>
   );
 }
-
