@@ -28,6 +28,16 @@ export default function ContactForm() {
     } else {
       console.error('Contacts are undefined');
     }
+    dispatch(
+      addContact({
+        id: nanoid(),
+        name: name,
+        number: number,
+      })
+    );
+    
+    // setName('');
+    // setNumber('');
     
 
     setName('');
