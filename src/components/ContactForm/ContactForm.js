@@ -29,7 +29,7 @@ export default function ContactForm() {
         })
       );
 
-      window.history.replaceState({}, document.title, window.location.pathname);
+
   setName('');
   setNumber('');
 };
