@@ -3,8 +3,8 @@ import { removeContacts } from 'redux/contacts/contactsslice';
 import PropTypes from 'prop-types';
 import s from './ContactItem.module.css';
 
-export default function ContactItem({ id, name, number}) {
-    const dispatch = useDispatch();
+export default function ContactItem({ id, name, number }) {
+  const dispatch = useDispatch();
   return (
     <>
       <span>
