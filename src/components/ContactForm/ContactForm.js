@@ -6,7 +6,7 @@ import s from './ContactForm.module.css';
 
 export default function ContactForm() {
   const contacts = useSelector(getContacts);
-  console.log(contacts);
+  // console.log(contacts);
 
   const dispatch = useDispatch();
 
